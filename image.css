@@ -1,0 +1,14 @@
+
+img{
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+.pics_in_a_row{
+    display: flex;
+}
+
+.img1{flex: 1.3344;}
+.img2{flex: 1.3345;}
+.img3{flex: 0.7505;}

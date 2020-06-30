@@ -1,0 +1,73 @@
+ <?php
+
+                    require_once 'includes/dbh.inc.php';
+                    // SELECT DATA FROM THE DATABASE
+                    $sql = "SELECT * FROM gallery ORDER BY orderGallery DESC";
+                    $stmt = mysqli_stmt_init($conn);
+
+                    if(!mysqli_stmt_prepare($stmt, $sql)){
+                        header("Location:index.php?SelectError");
+                        exit();
+                    }else{
+                        mysqli_stmt_execute($stmt);
+                        // Get Results
+                        $results = mysqli_stmt_get_result($stmt);
+
+                        // Spit data 
+                        while ($row = mysqli_fetch_assoc($results)) {
+                            echo '<a href="#">
+                            <div style="background-image:url()" class="im">
+                            <img class="img-responsive" src="assets/img/gallery/'.$row["imgFullNameGallery"].'" alt="">
+                            </div>
+                            <h3>'.$row["titleGallery"].'</h3>
+                            <p>'.$row["descGallery"].'</p> 
+                        </a>';
+                        }
+                    }
+                    ?>
+
+
+                    <!-- Header -->
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="title-box text-center">
+                          <h3 class="title-a">
+                          Gallery
+                          </h3>
+                          <p class="subtitle-a">
+                          My best pictures will all be on this page
+                          </p>
+                          <div class="line-mf"></div>
+                      </div>
+                    </div>
+                 </div>
+                 <!-- END OF HEADER -->  
+
+
+
+                 CREATE TABLE users(
+    id INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(256) NOT NULL,
+    useremail VARCHAR(256) NOT NULL,
+    useruid VARCHAR(256) NOT NULL,
+    userpwd VARCHAR(256) NOT NULL
+);
+
+CREATE TABLE blogs(
+    id INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    blogcartegory LONGTEXT NOT NULL,
+    blogtitle LONGTEXT NOT NULL,
+    blogdesc LONGTEXT NOT NULL,
+    blogauthor LONGTEXT NOT NULL,
+    postdatetime LONGTEXT NOT NULL,
+    postimage LONGTEXT NOT NULL,
+    postorder INT(11) NOT NULL
+);
+
+CREATE TABLE gallery(
+    idGallery INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    titleGallery LONGTEXT NOT NULL,
+    descGallery LONGTEXT NOT NULL,
+    imgFullNameGallery LONGTEXT NOT NULL,
+    orderGallery LONGTEXT NOT NULL
+);
